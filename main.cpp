@@ -33,6 +33,18 @@ static std::string adjust_timestamp(const std::string& timestamp) {
 	std::string adjusted_str = (hour < 10 ? "0" : "") + std::to_string(hour) + timestamp.substr(13,6);
     return adjusted_str;
 }
+// 调整字节更改输出
+static std::string adjust_bytes(int bytes) {
+    if (bytes > 0) {
+        return std::string("+") + std::to_string(bytes);
+    }
+    else if (bytes < 0) {
+        return std::to_string(bytes);
+    }
+    else {
+        return std::string("0");
+    }
+}
 // 调整摘要输出
 static void print_comment(const json& item) {
     const auto& comment = item["comment"].get<std::string>();
@@ -75,7 +87,7 @@ static void printrc(const json& item) {
         std::cout << ZH_COMMA;
         std::cout << item["user"].get<std::string>() << std::string(reinterpret_cast<const char*>(u8"在")) << item["title"].get<std::string>() << std::string(reinterpret_cast<const char*>(u8"做出编辑"));
         std::cout << ZH_COMMA;
-        std::cout << std::string(reinterpret_cast<const char*>(u8"字节更改为")) << item["newlen"].get<int>() - item["oldlen"].get<int>();
+        std::cout << std::string(reinterpret_cast<const char*>(u8"字节更改为")) << std::string(adjust_bytes(item["newlen"].get<int>() - item["oldlen"].get<int>()));
         std::cout << ZH_COMMA;
         std::cout << std::string(reinterpret_cast<const char*>(u8"摘要为"));
         print_comment(item);
@@ -88,7 +100,7 @@ static void printrc(const json& item) {
         std::cout << ZH_COMMA;
         std::cout << item["user"].get<std::string>() << std::string(reinterpret_cast<const char*>(u8"创建")) << item["title"].get<std::string>();
         std::cout << ZH_COMMA;
-        std::cout << std::string(reinterpret_cast<const char*>(u8"字节更改为")) << item["newlen"].get<int>() - item["oldlen"].get<int>();
+        std::cout << std::string(reinterpret_cast<const char*>(u8"字节更改为")) << std::string(adjust_bytes(item["newlen"].get<int>() - item["oldlen"].get<int>()));
         std::cout << ZH_COMMA;
         std::cout << std::string(reinterpret_cast<const char*>(u8"摘要为"));
         print_comment(item);
@@ -185,7 +197,7 @@ int main() {
         // 解析登录结果
         json loginResult = json::parse(login_response.text);
         if (loginResult["login"]["result"] == "Success") {
-            std::cout << LOGIN_SUCCESS << std::endl;
+            std::cout << LOGIN_SUCCESS << std::endl << std::endl;
 
             // API基础参数
             // ?action=query&format=json&list=recentchanges|abuselog&formatversion=2&rcprop=title|timestamp|ids|comment|user|loginfo|sizes&rcshow=!bot&rclimit=100&rctype=edit|new|log&afllimit=100&aflprop=ids|user|title|action|result|timestamp|revid|filter
