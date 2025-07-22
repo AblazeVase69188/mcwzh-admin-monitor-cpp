@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <windows.h>
 #include <nlohmann/json.hpp>
 #include <cpr/cpr.h>
@@ -6,9 +6,8 @@ constexpr auto WIKI_API_URL = "https://zh.minecraft.wiki/api.php";
 using json = nlohmann::json; // 简化命名空间
 
 int main() {
-    // 设置控制台编码为UTF-8
-    SetConsoleOutputCP(65001);
-    SetConsoleCP(65001);
+    // 设置控制台为UTF-8编码
+    SetConsoleOutputCP(CP_UTF8);
 
     // 读取并解析配置文件
     json config;
@@ -32,13 +31,13 @@ int main() {
 		json AF_RESULT_MAP = config["af_result_map"];
 
         // 加载提示信息
-        std::string LOGIN_TOKEN_FAIL = config["login_token_fail"];
-        std::string LOGIN_TOKEN_SUCCESS = config["login_token_success"];
-        std::string LOGIN_FAIL = config["login_fail"];
-        std::string LOGIN_SUCCESS = config["login_success"];
-        std::string INITIAL_FAIL = config["initial_fail"];
-        std::string STARTUP_SUCCESS = config["startup_success"];
-        std::string REQUEST_FAIL = config["request_fail"];
+        std::string LOGIN_TOKEN_FAIL(reinterpret_cast<const char*>(u8"登录令牌获取失败"));
+        std::string LOGIN_TOKEN_SUCCESS(reinterpret_cast<const char*>(u8"登录令牌获取成功"));
+        std::string LOGIN_FAIL(reinterpret_cast<const char*>(u8"登录失败"));
+        std::string LOGIN_SUCCESS(reinterpret_cast<const char*>(u8"登录成功"));
+        std::string INITIAL_FAIL(reinterpret_cast<const char*>(u8"获取初始数据失败"));
+        std::string STARTUP_SUCCESS(reinterpret_cast<const char*>(u8"启动成功"));
+        std::string REQUEST_FAIL(reinterpret_cast<const char*>(u8"获取数据失败"));
 
         // 登录
         cpr::Session session;
