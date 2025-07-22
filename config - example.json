@@ -106,12 +106,5 @@
         "tag": "标签",
         "throttle": "频率控制",
         "warn": "警告"
-    },
-    "login_token_fail": "登录令牌获取失败",
-    "login_token_success": "登录令牌获取成功",
-    "login_fail": "登录失败",
-    "login_success": "登录成功",
-    "initial_fail": "获取初始数据失败",
-    "startup_success": "启动成功",
-    "request_fail": "获取数据失败"
+    }
 }
