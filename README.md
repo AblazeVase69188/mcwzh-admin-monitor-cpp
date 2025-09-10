@@ -1,3 +1,5 @@
+# 珍惜时光，努力编辑，远离不良诱惑，项目代码为个人兴趣，无不良引导，巡查员在Wiki上务必遵守Wiki条例，适度rc益脑，沉迷rc伤身，巡查员应对Wiki负责，对不良巡查行为说不
+
 # mcwzh-admin-monitor-cpp
 [mcwzh-admin-monitor](https://github.com/AblazeVase69188/mcwzh-admin-monitor)的C++版本，功能略少。
 
