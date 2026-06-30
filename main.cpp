@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include <windows.h>
 #include <nlohmann/json.hpp>
 #include <cpr/cpr.h>
